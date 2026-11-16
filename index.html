@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6e243d">
+  <meta name="description" content="MY LITTLE LIFE — ton espace personnel pour organiser tes études, tes projets et ton quotidien.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <title>MY LITTLE LIFE</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow" id="todayLabel">TON PETIT UNIVERS</div>
+        <div class="brand">my little <span>life</span><i>✿</i></div>
+      </div>
+      <button class="icon-button" id="backupBtn" aria-label="Sauvegarder les données" title="Sauvegarder">↥</button>
+    </header>
+
+    <main id="mainContent">
+      <section class="page active" id="page-home">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="eyebrow light">LUNDI APRÈS LUNDI, TU AVANCES</span>
+            <h1>Bonjour,<br><em>tu peux le faire.</em></h1>
+            <p id="dailyQuote">Une petite étape à la fois. Ta vie n'a pas besoin d'être parfaite pour être belle.</p>
+            <button class="button button-light" data-go="planner">Voir ma journée <span>↗</span></button>
+          </div>
+          <div class="hero-flower" aria-hidden="true">✿</div>
+        </div>
+        <div class="section-heading">
+          <div><span class="eyebrow">TON ESPACE</span><h2>Aujourd'hui</h2></div>
+          <span class="date-pill" id="datePill"></span>
+        </div>
+        <div class="stats-grid">
+          <article class="mini-stat"><span class="stat-icon">♡</span><strong id="taskCount">0</strong><small>tâches à faire</small></article>
+          <article class="mini-stat"><span class="stat-icon">✧</span><strong id="habitCount">0/0</strong><small>habitudes cochées</small></article>
+          <article class="mini-stat"><span class="stat-icon">◷</span><strong id="studyCount">0</strong><small>séances prévues</small></article>
+        </div>
+        <div class="section-heading compact"><div><span class="eyebrow">LE PETIT PROGRAMME</span><h2>Mes priorités</h2></div><button class="text-button" data-go="planner">Tout voir</button></div>
+        <div id="homeTasks" class="stack"></div>
+        <div class="tip-card"><span class="tip-spark">✧</span><div><span class="eyebrow">DOUCEUR DU JOUR</span><p id="wellbeingTip">Quand tu bloques, commence par seulement 10 minutes. L'élan vient souvent après.</p></div></div>
+      </section>
+
+      <section class="page" id="page-planner">
+        <div class="page-title"><span class="eyebrow">ORGANISER SANS SE SURCHARGER</span><h1>Mon planning</h1><p>Une journée structurée, avec de la place pour respirer.</p></div>
+        <div class="segmented"><button class="selected" data-plan-view="day">Jour</button><button data-plan-view="week">Semaine</button></div>
+        <div class="date-navigation"><button id="prevDay" class="round-button">‹</button><strong id="plannerDate"></strong><button id="nextDay" class="round-button">›</button></div>
+        <div id="weekStrip" class="week-strip"></div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Mes tâches</h3><button class="plus-button" id="addTaskBtn">＋</button></div>
+          <div id="taskList" class="stack"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Rendez-vous & événements</h3><button class="plus-button" id="addEventBtn">＋</button></div>
+          <div id="eventList" class="stack"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-study">
+        <div class="page-title"><span class="eyebrow">LICENCE 3 · DROIT</span><h1>Mon espace études</h1><p>Des révisions régulières, réalistes et adaptées à tes échéances.</p></div>
+        <div class="study-banner"><span>✧</span><div><b>Tu n'as pas besoin de tout retenir aujourd'hui.</b><small>La régularité vaut mieux qu'une longue session épuisante.</small></div></div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Mes matières</h3><button class="plus-button" id="addSubjectBtn">＋</button></div>
+          <div id="subjectList" class="stack"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Programme de révision</h3><button class="button button-small" id="generatePlan">Générer</button></div>
+          <p class="muted small">Répartit les chapitres non maîtrisés jusqu'aux examens, sur des créneaux de 45 minutes.</p>
+          <div id="revisionPlan" class="stack"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Quand je n'arrive plus à réviser</h3><span class="sparkle">✧</span></div>
+          <div class="reset-box">
+            <b>La méthode du redémarrage doux</b>
+            <ol><li>Pose tes cours et bois un verre d'eau.</li><li>Choisis une seule notion très précise.</li><li>Lis 5 minutes, puis ferme le cours.</li><li>Récite ou écris ce dont tu te souviens pendant 5 minutes.</li><li>Fais une pause de 5 minutes. Tu peux t'arrêter après ce mini-cycle.</li></ol>
+            <button class="button button-outline" id="newStudyTip">Un autre conseil</button>
+            <p id="studyTip" class="tip-result">Si tu es épuisée, une vraie pause est plus productive que de te forcer sans retenir.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-life">
+        <div class="page-title"><span class="eyebrow">TES PROJETS, À TON RYTHME</span><h1>Ma vie</h1><p>Travail, permis, anglais, sport et petits projets qui comptent.</p></div>
+        <div class="life-grid">
+          <button class="life-tile" data-life="Travail & stage"><span>♡</span><b>Travail & stage</b><small>CV, candidatures, relances</small></button>
+          <button class="life-tile" data-life="Anglais"><span>✧</span><b>Anglais</b><small>Un peu chaque jour</small></button>
+          <button class="life-tile" data-life="Permis B"><span>⌁</span><b>Permis B</b><small>Code et conduite</small></button>
+          <button class="life-tile" data-life="Sport & bien-être"><span>❀</span><b>Sport & bien-être</b><small>Énergie et équilibre</small></button>
+        </div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Mes habitudes</h3><button class="plus-button" id="addHabitBtn">＋</button></div>
+          <div id="habitList" class="stack"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Mes objectifs</h3><button class="plus-button" id="addGoalBtn">＋</button></div>
+          <div id="goalList" class="stack"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Notes & idées</h3><button class="plus-button" id="addNoteBtn">＋</button></div>
+          <div id="noteList" class="stack"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-food">
+        <div class="page-title"><span class="eyebrow">SIMPLE, BON ET PETIT BUDGET</span><h1>À table !</h1><p>Une semaine de repas équilibrés et une liste de courses sans prise de tête.</p></div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Mon menu de la semaine</h3><button class="button button-small" id="makeMenu">Composer</button></div>
+          <div id="mealPlan" class="meal-grid"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Ma liste de courses</h3><button class="plus-button" id="addGroceryBtn">＋</button></div>
+          <div id="groceryList" class="stack"></div>
+          <div class="grocery-total"><span>Budget estimé / réel</span><b id="groceryTotal">0,00 €</b></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading"><h3>Mon budget alimentaire</h3></div>
+          <label class="field-label" for="foodBudget">Budget hebdomadaire (€)</label><input id="foodBudget" class="field" type="number" min="0" step="1" placeholder="Ex. 45">
+          <p class="muted small">Le total des courses cochées ou non est calculé à partir des prix que tu renseignes.</p>
+        </div>
+      </section>
+
+      <section class="page" id="page-progress">
+        <div class="page-title"><span class="eyebrow">CÉLÉBRER LES PETITS PAS</span><h1>Ma progression</h1><p>Regarde le chemin parcouru, pas seulement ce qu'il reste à faire.</p></div>
+        <div class="stats-grid wide">
+          <article class="mini-stat"><span class="stat-icon">♡</span><strong id="doneTasks">0</strong><small>tâches terminées</small></article>
+          <article class="mini-stat"><span class="stat-icon">✧</span><strong id="habitRate">0%</strong><small>habitudes du jour</small></article>
+        </div>
+        <div class="panel"><div class="panel-heading"><h3>Cette semaine</h3></div><div id="weeklyBars" class="weekly-bars"></div></div>
+        <div class="panel"><div class="panel-heading"><h3>Mon petit bilan</h3></div><textarea id="weeklyReview" class="field textarea" placeholder="De quoi suis-je fière cette semaine ? Qu'est-ce que je veux ajuster ?"></textarea><button class="button button-primary" id="saveReview">Enregistrer mon bilan</button></div>
+        <div class="panel"><div class="panel-heading"><h3>Mes données</h3></div><p class="muted small">Tes données restent sur cet appareil. Exporte régulièrement une sauvegarde pour ne rien perdre.</p><div class="button-row"><button class="button button-outline" id="exportBtn">Exporter mes données</button><button class="button button-outline" id="importBtn">Restaurer</button><input id="importFile" type="file" accept="application/json" hidden></div><button class="text-button danger" id="resetBtn">Réinitialiser l'application</button></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Navigation principale">
+      <button class="nav-item active" data-page="home"><span>⌂</span><small>Accueil</small></button>
+      <button class="nav-item" data-page="planner"><span>▦</span><small>Planning</small></button>
+      <button class="nav-item" data-page="study"><span>✎</span><small>Études</small></button>
+      <button class="nav-item" data-page="life"><span>♡</span><small>Ma vie</small></button>
+      <button class="nav-item" data-page="food"><span>❀</span><small>Cuisine</small></button>
+      <button class="nav-item" data-page="progress"><span>◔</span><small>Bilan</small></button>
+    </nav>
+  </div>
+
+  <dialog id="entryDialog">
+    <form method="dialog" id="entryForm">
+      <div class="dialog-top"><span class="eyebrow" id="dialogEyebrow">AJOUTER</span><button class="icon-button" value="cancel" aria-label="Fermer">×</button></div>
+      <h2 id="dialogTitle">Nouvel élément</h2>
+      <div id="dialogFields"></div>
+      <div class="dialog-actions"><button class="button button-outline" value="cancel">Annuler</button><button class="button button-primary" id="dialogSave" value="default">Enregistrer</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
